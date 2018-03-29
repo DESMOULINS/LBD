@@ -1,49 +1,46 @@
+-- agregamos los campos de las relaciones en las bd
 use puntoventa
 -- Tabla de contactos
-create table contactos
-(
-	id_cont int IDENTITY(2,10) PRIMARY KEY,
-	-- esto relacionara uno a varios con la tabla personas
+create table contactos(
+	id_cont int IDENTITY(1,2) PRIMARY KEY,
 	id_relcontper int,
-	tel_per varchar(20) NOT NULL,
-	dir_per text,
-	correo_per text 
+	tel_cont varchar(20),
+	calle_cont varchar(35),
+	num_cont int,
+	codpost_cont int,
+	correo_cont varchar(40)
 )
 
 -- TABLA DE PERSONAS
-create table personas
-(
-	id_per int PRIMARY KEY,
-	nom_per varchar(20) NOT NULL,
-	apelpat_per varchar(10) NOT NULL,
-	apelmat_per varchar(10),
+create table personas(
+	id_per int IDENTITY(2,2) PRIMARY KEY,
+	nom_per varchar(20),
+	apelpat_per varchar(15),
+	apelmat_per varchar(15),
 	nomcom_per as (nom_per+apelpat_per+apelmat_per),
 	fechanac_per date,
 	edad_per AS DATEDIFF(YEAR,fechanac_per,GETDATE())
 )
 
--- TABLA DE USUARIO
-	create table empleados
-	(
-		id_em int IDENTITY(3,10) PRIMARY KEY,
+-- TABLA DE EMPLEADOS
+	create table empleados(
+		id_em int PRIMARY KEY,
 		usuario_em varchar(12) NOT NULL,
 		password_em varchar(12) NOT NULL,
-		salario_em int NOT NULL
+		salario_em int
 	)
 
 -- TABLA DE PROVEEDORES
-	create table proveedores
-	(
-		id_prov int IDENTITY(4,10) PRIMARY KEY,
+	create table proveedores(
+		id_prov int PRIMARY KEY,
 		nom_prov varchar(20) NOT NULL,
-		rfc_prov varchar(12) NOT NULL
+		rfc_prov varchar(12)
 	)
 
 -- Tabla de clientes
-	create table clientes
-	(
-		id_cli int IDENTITY(5,10) PRIMARY KEY,
-		rfc_cli varchar(12)
+	create table clientes(
+		id_cli int PRIMARY KEY,
+		rfc_cli varchar(15)
 	)
 
 -- //// Declaramos los indices
